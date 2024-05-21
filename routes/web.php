@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FamiliaController;
+use App\Http\Controllers\SectorController;
+use App\Http\Controllers\ActividadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FamiliaController::class, 'index']);
+Route::post('/guardar-familia', [FamiliaController::class, 'guardarFamilia']);
+Route::get('/sector/{familiaId}', [SectorController::class, 'getSectores']);
+Route::post('/guardar-sector', [SectorController::class, 'guardarSector']);
+Route::get('/actividad/{sectorId}', [ActividadController::class, 'getActividades']);
+Route::post('/guardar-actividad', [ActividadController::class, 'guardarActividad']);
+
