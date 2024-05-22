@@ -71,7 +71,7 @@
                                     <button type="button" onclick="enviarInfo('actividad')" id="btn-actividad" class="mt-4 py-2 px-4 rounded-full btn">Guardar</button>
                                 </div>
 
-                                <h5 class="mt-4 text-sm font-semibold text-gray-900 dark:text-white">Selecciona un perfil</h5>
+                                <h5 class="mt-4 text-sm font-semibold text-gray-900 dark:text-white">Selecciona un perfil de puesto</h5>
 
                                 <select id="Select-perfil" class="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" onchange="mostrarInputOtro('perfil')">
                                     
