@@ -77,6 +77,12 @@
                                     
                                 </select>
 
+                                <div id="Otro-perfil" style="display:none;">
+                                    <input type="text" id="input-perfil" name="input-perfil" placeholder="Especifique la opción" 
+                                    class="mt-4 block w-full py-2 px-3 border border-gray-300 scale-100" style="width: 100%">
+                                    <button type="button" onclick="enviarInfo('perfil')" id="btn-perfil" class="mt-4 py-2 px-4 rounded-full btn">Guardar</button>
+                                </div>
+
                             </div>
                         </div>
                         <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
