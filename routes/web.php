@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\ChatGPTController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,6 @@ Route::get('/sector/{familiaId}', [SectorController::class, 'getSectores']);
 Route::post('/guardar-sector', [SectorController::class, 'guardarSector']);
 Route::get('/actividad/{sectorId}', [ActividadController::class, 'getActividades']);
 Route::post('/guardar-actividad', [ActividadController::class, 'guardarActividad']);
-
+Route::get('/perfil/{actividadId}', [PerfilController::class, 'getPerfiles']);
+Route::post('/guardar-perfil', [PerfilController::class, 'guardarPerfil']);
+Route::get('/chatGPT', [ChatGPTController::class, 'chatGPT']);

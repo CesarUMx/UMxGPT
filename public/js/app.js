@@ -1,5 +1,32 @@
 let id_familia;
 let id_sector;
+let id_actividad;
+let id_perfil;
+let id_competencia;
+
+let texto_familia;
+let texto_sector;
+let texto_actividad;
+let texto_perfil;
+let texto_competencia;
+
+
+//funcion para obtener el texto de todos los select
+function obtenerTextoSelect(seccion) {
+    var selectElement = document.getElementById('Select-' + seccion);
+    var selectText = selectElement.options[selectElement.selectedIndex].text;
+    return selectText;
+}
+
+//acignar valores a las variables
+function asignarValores() {
+    texto_familia = obtenerTextoSelect('familia');
+    texto_sector = obtenerTextoSelect('sector');
+    texto_actividad = obtenerTextoSelect('actividad');
+    texto_perfil = obtenerTextoSelect('perfil');
+    texto_competencia = obtenerTextoSelect('competencia');
+}
+
 
 function decicion(seccion) {
     var select = document.getElementById('Select-' + seccion);
@@ -7,10 +34,19 @@ function decicion(seccion) {
         id_familia ? cargarSelect('/sector/' + id_familia, 'sector') : cargarSelect('/sector/' + select.value, 'sector');
         document.getElementById('Otro-sector').style.display = 'none';
         document.getElementById('Otro-actividad').style.display = 'none';
+        document.getElementById('Otro-perfil').style.display = 'none';
         document.getElementById('Select-actividad').innerHTML = '';
+        document.getElementById('Select-perfil').innerHTML = '';
     } else if (seccion === 'sector') {
         id_sector ? cargarSelect('/actividad/' + id_sector, 'actividad') : cargarSelect('/actividad/' + select.value, 'actividad');
         document.getElementById('Otro-actividad').style.display = 'none';
+        document.getElementById('Otro-perfil').style.display = 'none';
+        document.getElementById('Select-perfil').innerHTML = '';
+    } else if (seccion === 'actividad') {
+        id_actividad ? cargarSelect('/perfil/' + id_actividad, 'perfil') : cargarSelect('/perfil/' + select.value, 'perfil');
+        document.getElementById('Otro-perfil').style.display = 'none';
+    } else if (seccion === 'perfil') {
+        
     }
 }
 
@@ -47,7 +83,13 @@ function enviarInfo(seccion) {
             nombre: info,
             id_sector: id_sector
         }
-    };
+    } else if (seccion === 'perfil') {
+        id_actividad = id_actividad ? id_actividad : document.getElementById('Select-actividad').value;
+        data = {
+            nombre: info,
+            id_actividad: id_actividad
+        }
+    }
     enviarOtro('/guardar-' + seccion, data, seccion);
 };
 
@@ -86,9 +128,16 @@ function enviarOtro (url, datos, seccion) {
                 id_familia = data.id;
             } else if (seccion === 'sector') {
                 document.getElementById('Select-familia').disabled = true;
+                id_sector = data.id;
             } else if (seccion === 'actividad') {
                 document.getElementById('Select-familia').disabled = true;
                 document.getElementById('Select-sector').disabled = true;
+                id_actividad = data.id;
+            } else if (seccion === 'perfil') {
+                document.getElementById('Select-familia').disabled = true;
+                document.getElementById('Select-sector').disabled = true;
+                document.getElementById('Select-actividad').disabled = true;
+                id_perfil = data.id;
             }
         } else {
             notyf.error(data.message);
@@ -101,7 +150,6 @@ function enviarOtro (url, datos, seccion) {
 
 //cargar select
 function cargarSelect(url, select) {
-    console.log('cargarSelect' + select);
     fetch(url, {
         method: 'GET',
         headers: {
@@ -121,25 +169,28 @@ function cargarSelect(url, select) {
             option1.text = 'Seleccione una opción';
             selectCargar.appendChild(option1);
             if (data.data.length === 0) {
-                selectCargar.innerHTML = '';
-                let option = document.createElement('option');
-                option.value = 'nuevo';
-                option.text = 'Nuevo ' + select;
-                selectCargar.appendChild(option);
-                selectCargar.value = 'nuevo';
-                mostrarInputOtro(select);
-                return;
+                if (select === 'familia' || select === 'sector' || select === 'actividad') {
+                    selectCargar.innerHTML = '';
+                    let option = document.createElement('option');
+                    option.value = 'nuevo';
+                    option.text = 'Nuevo ' + select;
+                    selectCargar.appendChild(option);
+                    selectCargar.value = 'nuevo';
+                    mostrarInputOtro(select);
+                    return;
+                } else {
+                    //preguntar a chatGPT
+                    // let pregunta = {
+                    //     pregunta: '¿Qué competencia deseas agregar?'
+                    // }
+                    // preguntarChatGPT(pregunta);
+                }
+                
             }
             data.data.forEach(element => {
                 let option = document.createElement('option');
-                if (select === 'sector') {
-                    option.value = element.Id;
-                    option.text = element.Nombre;
-                }
-                if (select === 'actividad') {
-                    option.value = element.id;
-                    option.text = element.nombre;
-                }
+                option.value = element.id;
+                option.text = element.nombre;
                 selectCargar.appendChild(option);
             });
             let option = document.createElement('option');
@@ -149,6 +200,27 @@ function cargarSelect(url, select) {
         } else {
             notyf.error(data.message);
         }
+    })
+    .catch(error => {
+        notyf.error(error.message);
+    });
+}
+
+//funcion para preguntar a chatGPT
+function preguntarChatGPT(pregunta) {
+    console.log('preguntarChatGPT');
+fetch('/chatGPT', {
+    method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(pregunta)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
     })
     .catch(error => {
         notyf.error(error.message);

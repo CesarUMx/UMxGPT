@@ -87,6 +87,7 @@
                         </div>
                         <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
                             <div>
+                                <button type="button" onclick="preguntarChatGPT()" class="mt-4 py-2 px-4 rounded-full btn">chat</button>
                             </div>
                         </div>
                     </div>

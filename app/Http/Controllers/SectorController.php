@@ -36,7 +36,7 @@ class SectorController extends Controller
                 'id_familia' => 'required|exists:Familia,id'
             ], $messages);
         $sector = new Sector();
-        $sector->Nombre = $request->nombre;
+        $sector->nombre = $request->nombre;
         $sector->IdFamilia = $request->id_familia;
         $sector->save();
         return response()->json(['success' => true,'message' => 'Sector guardado correctamente', 'id' => $sector->id]);
