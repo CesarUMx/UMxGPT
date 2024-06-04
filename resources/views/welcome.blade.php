@@ -83,11 +83,26 @@
                                     <button type="button" onclick="enviarInfo('perfil')" id="btn-perfil" class="mt-4 py-2 px-4 rounded-full btn">Guardar</button>
                                 </div>
 
+                                <h5 class="mt-4 text-sm font-semibold text-gray-900 dark:text-white">Selecciona una competencia</h5>
+
+                                <select id="Select-competencia" class="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" onchange="mostrarInputOtro('competencia')">
+                                    
+                                </select>
+
+                                <div id="Otro-competencia" style="display:none;">
+                                    <input type="text" id="input-competencia" name="input-competencia" placeholder="Especifique la opción" 
+                                    class="mt-4 block w-full py-2 px-3 border border-gray-300 scale-100" style="width: 100%">
+                                    <button type="button" onclick="enviarInfo('competencia')" id="btn-competencia" class="mt-4 py-2 px-4 rounded-full btn">Guardar</button>
+                                </div>
+
+                            </div>
+                            <div id="loaderDiv" class="divloader" style="display: none;">
+                            <span class="loader"></span>
                             </div>
                         </div>
                         <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
                             <div>
-                                <button type="button" onclick="preguntarChatGPT()" class="mt-4 py-2 px-4 rounded-full btn">chat</button>
+                                <!-- <button type="button" onclick="preguntarChatGPT()" class="mt-4 py-2 px-4 rounded-full btn">chat</button> -->
                             </div>
                         </div>
                     </div>

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Perfiles', function (Blueprint $table) {
+        Schema::create('Sectores', function (Blueprint $table) {
             $table->id();
-            $table->integer('idActividad');
+            $table->integer('idFamilia');
             $table->string('nombre', 255);
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Perfiles');
+        Schema::dropIfExists('Sectores');
     }
 };

@@ -26,4 +26,8 @@ Route::get('/actividad/{sectorId}', [ActividadController::class, 'getActividades
 Route::post('/guardar-actividad', [ActividadController::class, 'guardarActividad']);
 Route::get('/perfil/{actividadId}', [PerfilController::class, 'getPerfiles']);
 Route::post('/guardar-perfil', [PerfilController::class, 'guardarPerfil']);
-Route::get('/chatGPT', [ChatGPTController::class, 'chatGPT']);
+Route::post('/chatGPT', [ChatGPTController::class, 'chatGPT']);
+Route::get('/competencia/{perfilId}', [CompetenciaController::class, 'getCompetencias']);
+Route::post('/guardar-competencia', [CompetenciaController::class, 'guardarCompetencia']);
+Route::post('/descripcion', [CompetenciaController::class, 'traerDescripcion']);
+Route::post('/guardar-descripcion', [CompetenciaController::class, 'guardarDescripcion']);

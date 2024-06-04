@@ -25,14 +25,13 @@ class PerfilController extends Controller
         $messages = [
             'nombre.required' => 'El nombre del perfil es requerido.',
             'nombre.max' => 'El nombre del perfil no debe exceder los 255 caracteres.',
-            'nombre.unique' => 'El nombre del perfil ya existe.',
             'nombre.regex' => 'El nombre del perfil debe contener solo letras y espacios.',
             'nombre.string' => 'El nombre del perfil debe ser una cadena de texto.',
         ];
 
         try {
             $request->validate([
-                'nombre' => 'required|string|max:255|unique:Perfiles,nombre|regex:/^[a-zA-Z\s]*$/',
+                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]*$/',
                 'id_actividad' => 'required|exists:Actividades,id'
             ], $messages);
         $profile = new Perfil();
@@ -41,9 +40,7 @@ class PerfilController extends Controller
         $profile->save();
         return response()->json(['success' => true,'message' => 'Perfil de puesto creado', 'id' => $profile->id]);
         } catch (ValidationException $e) {
-            if (array_has($e->errors(), 'nombre.unique')) {
-                return response()->json(['success' => false,'message' => $e->errors()['nombre'][2]]);
-            }
+            
             if (array_has($e->errors(), 'nombre.required')) {
                 return response()->json(['success' => false,'message' => $e->errors()['nombre'][0]]);
             }
