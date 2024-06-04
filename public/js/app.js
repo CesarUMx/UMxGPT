@@ -45,16 +45,26 @@ function decicion(seccion) {
         document.getElementById('Otro-sector').style.display = 'none';
         document.getElementById('Otro-actividad').style.display = 'none';
         document.getElementById('Select-actividad').innerHTML = '';
+        document.getElementById('Otro-perfil').style.display = 'none';
+        document.getElementById('Select-perfil').innerHTML = '';
+        document.getElementById('Otro-competencia').style.display = 'none';
+        document.getElementById('Select-competencia').innerHTML = '';
     } else if (seccion === 'sector') {
         id_sector ? cargarSelect('/actividad/' + id_sector, 'actividad') : cargarSelect('/actividad/' + select.value, 'actividad');
         document.getElementById('Otro-actividad').style.display = 'none';
         document.getElementById('Otro-perfil').style.display = 'none';
         document.getElementById('Select-perfil').innerHTML = '';
+        document.getElementById('Otro-competencia').style.display = 'none';
+        document.getElementById('Select-competencia').innerHTML = '';
     } else if (seccion === 'actividad') {
         id_actividad ? cargarSelect('/perfil/' + id_actividad, 'perfil') : cargarSelect('/perfil/' + select.value, 'perfil');
         document.getElementById('Otro-perfil').style.display = 'none';
-    } else if (seccion === 'perfil') {
+        document.getElementById('Otro-competencia').style.display = 'none';
+        document.getElementById('Select-competencia').innerHTML = '';
 
+    } else if (seccion === 'perfil') {
+        id_perfil ? cargarSelect('/competencia/' + id_perfil, 'competencia') : cargarSelect('/competencia/' + select.value, 'competencia');
+        document.getElementById('Otro-competencia').style.display = 'none';
     }
 }
 
@@ -239,7 +249,7 @@ async function handleEmptySelect(select, selectCargar) {
                 await enviarOtro('/guardar-perfil', data, 'perfil', 'perfil');
             });
 
-            await cargarSelect('/perfil/' + id_actividad, 'perfil');
+            await cargarSelect(id_actividad ? '/perfil/' + id_actividad : '/perfil/' + document.getElementById('Select-actividad').value, 'perfil');
         }
     }
 }
