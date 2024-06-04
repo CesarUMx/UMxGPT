@@ -10,7 +10,7 @@ class SectorController extends Controller
     //get all sectors fro id family
     public function getSectores($idFamily){
         
-        $sectors = Sector::where('IdFamilia', $idFamily)->get();        
+        $sectors = Sector::where('idFamilia', $idFamily)->get();        
 
         //$sectors = Sector::pluck('nombre', 'id')->where('IdFamilia', $idFamily);
         return response()->json([
@@ -33,11 +33,11 @@ class SectorController extends Controller
         try {
             $request->validate([
                 'nombre' => 'required|string|max:255|unique:Sectores,nombre|regex:/^[a-zA-Z\s]*$/',
-                'id_familia' => 'required|exists:Familia,id'
+                'id_familia' => 'required|exists:Familias,id'
             ], $messages);
         $sector = new Sector();
-        $sector->Nombre = $request->nombre;
-        $sector->IdFamilia = $request->id_familia;
+        $sector->nombre = $request->nombre;
+        $sector->idFamilia = $request->id_familia;
         $sector->save();
         return response()->json(['success' => true,'message' => 'Sector guardado correctamente', 'id' => $sector->id]);
         } catch (ValidationException $e) {
@@ -56,8 +56,8 @@ class SectorController extends Controller
             if (array_has($e->errors(), 'nombre.string')) {
                 return response()->json(['success' => false,'message' => $e->errors()['nombre'][4]]);
             }
-            if (array_has($e->errors(), 'IdFamilia.exists')) {
-                return response()->json(['success' => false,'message' => $e->errors()['IdFamilia'][0]]);
+            if (array_has($e->errors(), 'idFamilia.exists')) {
+                return response()->json(['success' => false,'message' => $e->errors()['idFamilia'][0]]);
             }
         }
     }

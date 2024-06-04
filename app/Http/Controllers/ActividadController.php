@@ -25,14 +25,13 @@ class ActividadController extends Controller
         $messages = [
             'nombre.required' => 'El nombre de la actividad es requerido.',
             'nombre.max' => 'El nombre de la actividad no debe exceder los 255 caracteres.',
-            'nombre.unique' => 'El nombre de la actividad ya existe.',
             'nombre.regex' => 'El nombre de la actividad debe contener solo letras y espacios.',
             'nombre.string' => 'El nombre de la actividad debe ser una cadena de texto.',
         ];
 
         try {
             $request->validate([
-                'nombre' => 'required|string|max:255|unique:Actividades,nombre|regex:/^[a-zA-Z\s]*$/',
+                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]*$/',
                 'id_sector' => 'required|exists:Sectores,id'
             ], $messages);
         $activity = new Actividad();
@@ -41,9 +40,7 @@ class ActividadController extends Controller
         $activity->save();
         return response()->json(['success' => true,'message' => 'Activity saved correctly', 'id' => $activity->id]);
         } catch (ValidationException $e) {
-            if (array_has($e->errors(), 'nombre.unique')) {
-                return response()->json(['success' => false,'message' => $e->errors()['nombre'][2]]);
-            }
+            
             if (array_has($e->errors(), 'nombre.required')) {
                 return response()->json(['success' => false,'message' => $e->errors()['nombre'][0]]);
             }
