@@ -44,9 +44,7 @@ function decicion(seccion) {
         id_familia ? cargarSelect('/sector/' + id_familia, 'sector') : cargarSelect('/sector/' + select.value, 'sector');
         document.getElementById('Otro-sector').style.display = 'none';
         document.getElementById('Otro-actividad').style.display = 'none';
-        document.getElementById('Otro-perfil').style.display = 'none';
         document.getElementById('Select-actividad').innerHTML = '';
-        document.getElementById('Select-perfil').innerHTML = '';
     } else if (seccion === 'sector') {
         id_sector ? cargarSelect('/actividad/' + id_sector, 'actividad') : cargarSelect('/actividad/' + select.value, 'actividad');
         document.getElementById('Otro-actividad').style.display = 'none';

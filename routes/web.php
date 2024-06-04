@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\ActividadController;
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ChatGPTController;
 
 /*
 |--------------------------------------------------------------------------
