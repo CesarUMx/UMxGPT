@@ -101,8 +101,17 @@
                             </div>
                         </div>
                         <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
-                            <div>
-                                <!-- <button type="button" onclick="preguntarChatGPT()" class="mt-4 py-2 px-4 rounded-full btn">chat</button> -->
+                            <div id="Descripcion" style="display: none;">
+                                <h2 class="mt-6 text-xl font-bold text-gray-900 dark:text-white">Descripción</h4>
+                                <p class="mt-4 text-sm font-semibold text-gray-900 dark:text-white" id="text_descripcion"></p>
+                                <button id="Continue1" type="button" onclick="mostrarConductas()" class="mt-4 py-2 px-4 rounded-full btn">Continuar</button>
+                                <hr class="mt-4">
+                                <h2 id="titulo_conductas" class="mt-6 text-xl font-bold text-gray-900 dark:text-white" style="display: none;">Conductas</h4>
+                                <div id="conductas" class="mt-4 text-sm font-semibold text-gray-900 dark:text-white"></div>
+                                
+                            </div>
+                            <div id="loaderDes" class="divloader" style="display: none;">
+                                <span class="loader"></span>
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@ use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\ChatGPTController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CompetenciaController;
-
+use App\Http\Controllers\ConductasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +32,6 @@ Route::get('/competencia/{perfilId}', [CompetenciaController::class, 'getCompete
 Route::post('/guardar-competencia', [CompetenciaController::class, 'guardarCompetencia']);
 Route::post('/descripcion', [CompetenciaController::class, 'traerDescripcion']);
 Route::post('/guardar-descripcion', [CompetenciaController::class, 'guardarDescripcion']);
+Route::get('/conducta/{competenciaId}', [ConductasController::class, 'getConductas']);
+Route::post('/guardar-conducta', [ConductasController::class, 'guardarConducta']);
+Route::post('/guardar-nivel', [ConductasController::class, 'guardarNivel']);

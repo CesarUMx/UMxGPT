@@ -31,7 +31,7 @@ class PerfilController extends Controller
 
         try {
             $request->validate([
-                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]*$/',
+                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s\/]*$/',
                 'id_actividad' => 'required|exists:Actividades,id'
             ], $messages);
         $profile = new Perfil();

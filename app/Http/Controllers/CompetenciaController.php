@@ -31,7 +31,7 @@ class CompetenciaController extends Controller
 
         try {
             $request->validate([
-                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]*$/',
+                'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s\/]*$/',
                 'id_perfil' => 'required|exists:Perfiles,id'
             ], $messages);
         $competence = new Competencia();
@@ -45,13 +45,13 @@ class CompetenciaController extends Controller
                 return response()->json(['success' => false,'message' => $e->errors()['nombre'][0]]);
             }
             if (array_has($e->errors(), 'nombre.regex:')) {
-                return response()->json(['success' => false,'message' => $e->errors()['nombre'][3]]);
+                return response()->json(['success' => false,'message' => $e->errors()['nombre'][2]]);
             }
             if (array_has($e->errors(), 'nombre.max')) {
                 return response()->json(['success' => false,'message' => $e->errors()['nombre'][1]]);
             }
             if (array_has($e->errors(), 'nombre.string')) {
-                return response()->json(['success' => false,'message' => $e->errors()['nombre'][4]]);
+                return response()->json(['success' => false,'message' => $e->errors()['nombre'][3]]);
             }
             if (array_has($e->errors(), 'IdPerfil.exists')) {
                 return response()->json(['success' => false,'message' => $e->errors()['IdPerfil'][0]]);
